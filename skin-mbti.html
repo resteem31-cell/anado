@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>내 피부 MBTI 체크리스트</title>
+<meta name="description" content="12문항에 답하면 내 피부 MBTI 결과가 바로 나와요. 무료 피부진단 상담도 신청할 수 있어요.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="내 피부 MBTI 체크리스트">
+<meta property="og:description" content="12문항에 답하면 내 피부 MBTI 결과가 바로 나와요. 무료 피부진단 상담도 신청할 수 있어요.">
+<link rel="icon" href="assets/img/monogram.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --surface:#f2faf6; --ink:#14181a; --muted:#55665f; --line:#d3e5dd;
+  --em:#0b7a5c; --em-ink:#ffffff; --accent:#e8590c;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1613; --surface:#16211c; --ink:#eaf2ee; --muted:#9db1a8; --line:#274037;
+    --em:#2dbb92; --em-ink:#08130f; --accent:#ff8a4c;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1613; --surface:#16211c; --ink:#eaf2ee; --muted:#9db1a8; --line:#274037;
+  --em:#2dbb92; --em-ink:#08130f; --accent:#ff8a4c;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 76px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:16px;line-height:1.65}
+[hidden]{display:none!important}
+.wrap{max-width:640px;margin:0 auto;padding:0 20px 56px}
+h1,h2,h3{font-family:'Noto Serif KR','Batang','AppleMyungjo',serif}
+h1{font-size:34px;line-height:1.25;margin:36px 0 10px;letter-spacing:-.02em}
+.lead{color:var(--muted);margin:0 0 24px;max-width:34em}
+h2{font-size:21px;margin:44px 0 6px;padding-bottom:10px;border-bottom:2px solid var(--em);letter-spacing:-.01em}
+.hint{color:var(--muted);font-size:14px;margin:6px 0 16px}
+h3{font-size:16px;margin:28px 0 10px;color:var(--em)}
+
+#codebar{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;display:flex;align-items:center;gap:14px;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 20px;margin:0 -20px}
+.cb-label{font-size:13px;color:var(--muted);white-space:nowrap}
+.slots{display:flex;gap:6px}
+.slot{width:38px;height:44px;display:grid;place-items:center;border:1.5px solid var(--line);border-radius:8px;font-family:'Noto Serif KR',serif;font-weight:700;font-size:22px;color:var(--muted);background:var(--surface)}
+.slot.on{border-color:var(--accent);color:var(--accent);background:var(--bg)}
+#cnt{margin-left:auto;font-size:13px;color:var(--muted);white-space:nowrap}
+
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{font-weight:500;padding:0;margin:22px 0 8px}
+.q .n{color:var(--accent);font-family:'Noto Serif KR',serif;font-weight:700;margin-right:6px}
+.opts{display:grid;gap:8px}
+.opt{position:relative;display:block}
+.opt input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.opt span{display:block;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--bg)}
+.opt input:checked + span{border-color:var(--em);background:var(--surface);box-shadow:inset 4px 0 0 var(--em);font-weight:500}
+.opt input:focus-visible + span{outline:3px solid var(--accent);outline-offset:2px}
+button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+.btn{display:block;font:inherit;font-weight:700;border:0;border-radius:12px;padding:14px 22px;cursor:pointer;text-decoration:none;text-align:center;width:100%}
+.btn.primary{background:var(--em);color:var(--em-ink);font-size:17px}
+.btn.alt{background:var(--bg);color:var(--em);border:1.5px solid var(--em)}
+.note{font-size:13px;color:var(--muted)}
+
+#result{margin-top:36px;border:2px solid var(--em);border-radius:18px;padding:22px 20px;background:var(--bg)}
+#rcode{font-family:'Noto Serif KR',serif;font-weight:700;font-size:52px;letter-spacing:.08em;color:var(--accent);line-height:1.1;margin:0}
+#rsum{font-weight:500;margin:6px 0 14px}
+#rpoints{margin:0 0 18px;padding-left:20px}
+#rpoints li{margin:4px 0}
+#result .btn{margin-top:14px}
+
+.apply-d{font-weight:500;margin:10px 0 16px}
+.codeline{display:flex;align-items:center;gap:12px;background:var(--surface);border-radius:12px;padding:12px 16px;margin:0 0 14px}
+.codeline strong{font-family:'Noto Serif KR',serif;font-size:24px;letter-spacing:.08em;color:var(--accent)}
+.codeline .btn{width:auto;margin-left:auto;padding:8px 14px;font-size:14px}
+#msg{color:var(--em);font-weight:500;min-height:1.4em;margin:8px 0 0}
+@media (max-width:420px){h1{font-size:29px}.slot{width:34px;height:40px;font-size:20px}.cb-label{display:none}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>내 피부 MBTI 체크리스트</h1>
+<p class="lead">12문항에 답하면 결과가 바로 나와요. 더 정확한 진단이 궁금하면 맨 아래에서 무료 피부진단 상담을 신청할 수 있어요.</p>
+
+<div id="codebar" aria-live="polite">
+  <span class="cb-label">내 피부 코드</span>
+  <div class="slots">
+    <span class="slot" id="slot0">·</span><span class="slot" id="slot1">·</span><span class="slot" id="slot2">·</span><span class="slot" id="slot3">·</span>
+  </div>
+  <span id="cnt">0/12</span>
+</div>
+
+<h2>피부 타입 테스트</h2>
+<p class="hint">평소 맨얼굴 기준으로, 더 가까운 쪽을 골라 주세요. 위쪽 코드가 답에 따라 채워져요.</p>
+<div id="qs"></div>
+
+<section id="result" hidden aria-live="polite">
+  <p class="note" style="margin:0 0 4px">나의 피부 MBTI</p>
+  <p id="rcode"></p>
+  <p id="rsum"></p>
+  <ul id="rpoints"></ul>
+  <p class="note">생활 속 자가 체크 결과이며 의학적 진단이 아니에요. 피부 질환이 의심되면 피부과 진료를 받아 주세요.</p>
+  <button type="button" class="btn alt" id="toApply">무료 피부진단 상담 신청하기</button>
+</section>
+
+<section id="applySec">
+  <h2>무료 피부진단 상담 신청</h2>
+  <p class="apply-d">지역별 컨설턴트가 직접 만나 정확히 진단하고 제품을 테스트해보실 수 있습니다.</p>
+  <div class="codeline" id="codeLine" hidden>
+    <span>내 코드</span><strong id="codeText"></strong>
+    <button type="button" class="btn alt" id="copyCode">코드 복사</button>
+  </div>
+  <p class="note" style="margin:0 0 14px">신청서에는 피부 MBTI 코드를 적는 칸이 있어요. 테스트를 마쳤다면 위 코드를 복사해 붙여넣어 주세요.</p>
+  <a class="btn primary" id="applyLink" href="https://naver.me/FAAg7yrA" target="_blank" rel="noopener">상담 신청서 작성하기</a>
+  <p id="msg"></p>
+</section>
+
+</div>
+
+<script>
+(function(){
+  var AX=[
+    {key:'od',name:'유분 · 수분',pair:['O','D'],qs:[
+      ['세안 후 아무것도 바르지 않고 1~2시간이 지나면?','코·이마가 번들거린다','얼굴이 당기고 건조하다'],
+      ['오후가 되면 베이스 메이크업은?','T존이 기름져 무너진다','건조해서 갈라지거나 들뜬다'],
+      ['평소 모공은 어떤가요?','눈에 띄는 편이다','거의 보이지 않는다']]},
+    {key:'sr',name:'민감도',pair:['S','R'],qs:[
+      ['새 화장품을 쓰면?','붉어짐·가려움·따가움이 자주 생긴다','대부분 문제없이 쓴다'],
+      ['바람·온도 변화·햇빛을 만나면?','쉽게 붉어지거나 화끈거린다','별 반응이 없다'],
+      ['각질 제거나 레티놀 같은 활성 성분을 쓰면?','쉽게 따갑고 붉어진다','잘 견딘다']]},
+    {key:'pn',name:'색소',pair:['P','N'],qs:[
+      ['기미·잡티·주근깨는?','잘 생기고 눈에 띈다','거의 없다'],
+      ['트러블이 낫고 나면?','갈색·붉은 자국이 오래 남는다','자국 없이 금방 사라진다'],
+      ['햇빛을 많이 받으면?','쉽게 타고 잡티가 올라온다','잘 타지 않고 변화가 적다']]},
+    {key:'wt',name:'주름 · 탄력',pair:['W','T'],qs:[
+      ['눈가·입가·이마를 보면?','잔주름이나 팔자가 눈에 띈다','거의 없다'],
+      ['얼굴 탄력은?','예전보다 처졌다고 느낀다','아직 탄탄한 편이다'],
+      ['표정을 지었다 풀면 생긴 선이?','한동안 남아 있다','금방 펴진다']]}
+  ];
+  var TR={
+    O:['유분이 많고','가벼운 수분 위주로 보습하고 과한 세안은 피하세요.'],
+    D:['건조하고','보습막을 보강하고 뜨거운 물 세안은 피하세요.'],
+    S:['자극에 예민하고','새 제품은 팔 안쪽에 먼저 테스트하고 단계를 줄여 보세요.'],
+    R:['자극에 강하고','활성 성분은 낮은 농도에서 시작해 단계적으로 늘려 보세요.'],
+    P:['색소가 생기기 쉽고','자외선 차단제를 매일 바르고 염증·마찰을 줄이세요.'],
+    N:['색소 침착이 적고','지금 상태를 지키도록 자외선 차단을 기본으로 하세요.'],
+    W:['주름·탄력 변화가 먼저 오는','재생·탄력 관리와 수면, 자외선 차단을 함께 챙기세요.'],
+    T:['탄력이 비교적 유지되는','보습과 자외선 차단 중심의 예방 관리가 좋아요.']
+  };
+
+  function $(id){return document.getElementById(id)}
+  function reduce(){return window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches}
+
+  var qs=$('qs'),num=0;
+  AX.forEach(function(ax){
+    var h=document.createElement('h3');h.textContent=ax.name;qs.appendChild(h);
+    ax.qs.forEach(function(q,i){
+      num++;
+      var fs=document.createElement('fieldset');fs.className='q';
+      var lg=document.createElement('legend');
+      var n=document.createElement('span');n.className='n';n.textContent=num;
+      lg.appendChild(n);lg.appendChild(document.createTextNode(q[0]));fs.appendChild(lg);
+      var box=document.createElement('div');box.className='opts';
+      ['A','B'].forEach(function(val,k){
+        var lb=document.createElement('label');lb.className='opt';
+        var inp=document.createElement('input');inp.type='radio';inp.name=ax.key+i;inp.value=val;
+        var sp=document.createElement('span');sp.textContent=q[k+1];
+        lb.appendChild(inp);lb.appendChild(sp);box.appendChild(lb);
+        inp.addEventListener('change',updateCode);
+      });
+      fs.appendChild(box);qs.appendChild(fs);
+    });
+  });
+
+  function axisLetter(ax){
+    var a=0,b=0;
+    ax.qs.forEach(function(q,i){
+      var e=document.querySelector('input[name="'+ax.key+i+'"]:checked');
+      if(e){if(e.value==='A')a++;else b++;}
+    });
+    if(a>=2)return ax.pair[0];
+    if(b>=2)return ax.pair[1];
+    return null;
+  }
+  function answered(){return document.querySelectorAll('#qs input:checked').length}
+
+  function renderResult(){
+    var letters=AX.map(axisLetter),code=letters.join('');
+    $('rcode').textContent=code;
+    $('rsum').textContent=letters.map(function(l){return TR[l][0]}).join(' ')+' 피부';
+    var ul=$('rpoints');ul.textContent='';
+    letters.forEach(function(l){var li=document.createElement('li');li.textContent=TR[l][1];ul.appendChild(li)});
+    $('codeText').textContent=code;
+    $('codeLine').hidden=false;
+    var r=$('result'),first=r.hidden;
+    r.hidden=false;
+    if(first)r.scrollIntoView({behavior:reduce()?'auto':'smooth',block:'start'});
+  }
+  function updateCode(){
+    AX.forEach(function(ax,i){
+      var L=axisLetter(ax),s=$('slot'+i);
+      s.textContent=L||'·';
+      s.className='slot'+(L?' on':'');
+    });
+    $('cnt').textContent=answered()+'/12';
+    if(answered()===12)renderResult();
+  }
+
+  $('toApply').addEventListener('click',function(){
+    $('applySec').scrollIntoView({behavior:reduce()?'auto':'smooth',block:'start'});
+  });
+
+  $('copyCode').addEventListener('click',function(){
+    var code=$('codeText').textContent;
+    function ok(){$('msg').textContent='코드 '+code+' 를 복사했어요. 신청서에 붙여넣어 주세요.'}
+    function legacy(){
+      try{
+        var t=document.createElement('textarea');t.value=code;t.style.position='fixed';t.style.opacity='0';
+        document.body.appendChild(t);t.select();
+        var done=document.execCommand('copy');document.body.removeChild(t);
+        if(done)ok();else $('msg').textContent='코드는 '+code+' 예요. 신청서에 직접 적어 주세요.';
+      }catch(e){$('msg').textContent='코드는 '+code+' 예요. 신청서에 직접 적어 주세요.';}
+    }
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(code).then(ok,legacy);
+    }else legacy();
+  });
+
+  updateCode();
+})();
+</script>
+</body>
+</html>

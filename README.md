@@ -7,6 +7,7 @@
 | 파일 | 내용 |
 |---|---|
 | `index.html` | 홈페이지 본문 (브랜드, 4단계 루틴, 제품 4종, 피부타입 테스트, 상담 신청서) |
+| `skin-mbti.html` | 단독 공유용 "내 피부 MBTI 체크리스트" 페이지 (12문항 → 코드 결과 → 상담 신청 링크) |
 | `css/style.css` | 디자인 (아이보리 · 골드 톤, 큰 글씨) |
 | `js/main.js` | 피부타입 테스트, 신청서 검사·전송 |
 | `js/config.js` | **신청서를 받을 메일 주소** |
@@ -29,6 +30,8 @@
 ## 사이트 공개 방법
 GitHub 저장소 [Settings] → [Pages] 에서 이 브랜치의 루트(`/`)를 선택하면 무료로 공개됩니다.
 Netlify 등에 폴더를 그대로 올려도 됩니다.
+
+공개 후 피부 MBTI 체크리스트 주소: `https://resteem31-cell.github.io/-/skin-mbti.html`
 
 ## Claude Code 도구
 `.claude/skills/` 에 website-builder-setup, ui-ux-pro-max 스킬이 들어 있고, `.mcp.json` 에 21st.dev Magic 설정이 있습니다
